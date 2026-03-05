@@ -1,88 +1,55 @@
-# Student Academic Success Prediction
+# Student Performance Classification using Machine Learning
 
-This project analyzes the impact of **family background** and **school environment** factors on student academic success using machine learning models.
+A machine learning project that investigates the relative influence of family background vs. school environment on student academic success using classification models. Built using Python and Scikit-learn on real student performance datasets.
 
----
+## Research Question
 
-## Project Objective
-
-The main objective of this project is to compare the predictive power of:
-
-- **Family-related features**
-- **School-related features**
-
-in determining student academic success.
-
-The analysis focuses on identifying which factors are more influential depending on the subject.
-
----
+Which has a greater impact on student academic success — family background or school environment?
 
 ## Dataset
 
-Two public educational datasets were used:
+Two publicly available datasets were used: `student-mat.csv` (Mathematics) and `student-por.csv` (Portuguese), tracking student performance in secondary school. The final grade (G3) was transformed into a binary classification target (pass/fail).
 
-- `student-mat.csv` – Mathematics dataset  
-- `student-por.csv` – Portuguese language dataset  
+Features were divided into two conceptual groups:
+- **Family background** — parental education, parental occupation, family relationship quality, guardian type
+- **School environment** — absences, study time, academic support, school-related activities
 
-The datasets include:
+## Tech Stack
 
-- demographic information  
-- family background variables  
-- school environment characteristics  
-- student grades  
+- **Language:** Python
+- **Libraries:** Scikit-learn, Pandas, NumPy, Matplotlib
+- **Models:** Logistic Regression, Random Forest, SVM
 
-### Academic Success Definition
+## Methodology
 
-- **G3 ≥ 10** → Successful  
-- **G3 < 10** → Unsuccessful  
-
----
-
-## Data Preprocessing
-
-The following preprocessing steps were applied:
-
-- One-hot encoding for categorical variables  
-- Standardization using z-score normalization  
-- Stratified train-test split to preserve class distribution  
-
----
-
-## Machine Learning Models
-
-The following classification models were used:
-
-- Logistic Regression  
-- Random Forest  
-- Support Vector Machine (SVM)  
-
----
-
-## Dimensionality Reduction
-
-Principal Component Analysis (**PCA**) was applied to visualize the separation between successful and unsuccessful students based on feature groups.
-
----
-
-## Evaluation Metrics
-
-Model performance was evaluated using:
-
-- Accuracy  
-- Precision  
-- Recall  
-- F1-score  
-
-The **F1-score** was emphasized because it balances precision and recall in binary classification problems.
-
----
+- Features split into three experimental configurations: family-only, school-only, and combined
+- Categorical variables encoded using one-hot encoding; numerical features normalized
+- Stratified train/test split to preserve class balance
+- Hyperparameter tuning via grid search with cross-validation
+- PCA applied separately to family and school feature sets for visualization
 
 ## Key Findings
 
-- **School-related variables** such as absences and study time showed stronger predictive power for **Mathematics performance**.  
-- **Family background variables** were slightly more influential for **Portuguese language performance**.  
-- Combining both feature groups did not significantly improve prediction performance.
+- **Mathematics dataset:** School-related features (especially absences and study time) yielded the highest F1-scores, with Random Forest performing best using school-only features.
+- **Portuguese dataset:** Family background features achieved the highest F1-scores; school-only models underperformed comparatively.
+- **Feature importance:** Within the family group, parental education, parental occupation, and family relationship quality were most influential.
+- **PCA:** School feature sets provided more geometrically separable class distributions despite family features explaining a comparable proportion of variance.
+- **Overall:** Results suggest school environment factors are stronger predictors for Mathematics, while family background plays a more meaningful role in Portuguese performance.
 
-These findings suggest that different subjects may be influenced by different contextual factors.
+## Model Evaluation
 
----
+Models were evaluated using accuracy, precision, recall, and F1-score. F1-score was emphasized as the primary metric to handle class imbalance. Confusion matrix analysis showed that family-only models tended toward different misclassification patterns compared to school-only models.
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pip install scikit-learn pandas numpy matplotlib
+   ```
+3. Run the preprocessing script, then train and evaluate the models.
+
+## Authors
+
+Beyzanur Deniz, Can Eye, Gizem Uluceviz, Özgür Akyol  
+Management Information Systems, Kadir Has University — MIS325 Data Mining & Business Intelligence
